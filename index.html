@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Магазин разработок по английскому</title>
+
+  <!-- ===== СТИЛИ САЙТА ===== -->
+  <style>
+    :root {
+      --bg-main: #0f172a;          /* тёмно-синий фон */
+      --bg-section: #111827;       /* блоки */
+      --card-bg: #1f2933;          /* карточки */
+      --accent: #3b82f6;           /* основной синий */
+      --accent-soft: #60a5fa;      /* светлый синий */
+      --text-main: #e5e7eb;        /* основной текст */
+      --text-muted: #9ca3af;       /* вторичный текст */
+      --border-soft: #1f2937;      /* мягкая граница */
+      --shadow-soft: 0 18px 35px rgba(15, 23, 42, 0.8);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --transition-fast: 0.22s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at top, #1f2937 0, #020617 50%, #020617 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* ===== ОБЩИЙ КОНТЕЙНЕР ===== */
+    .page-wrapper {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+    }
+
+    /* ===== ШАПКА САЙТА ===== */
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+
+    .logo-block {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .logo-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .logo-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .pill-text {
+      font-size: 0.8rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: var(--text-muted);
+    }
+
+    /* ===== УНИВЕРСАЛЬНАЯ КНОПКА ===== */
+    .btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 9px 18px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--accent), var(--accent-soft));
+      color: #0b1120;
+      box-shadow: 0 10px 20px rgba(37, 99, 235, 0.35);
+      transform: translateY(0px);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast), filter var(--transition-fast);
+    }
+
+    /*  При наведении все кнопки немного поднимаются вверх  */
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 35px rgba(37, 99, 235, 0.6);
+      filter: brightness(1.06);
+    }
+
+    .btn:active {
+      transform: translateY(-1px) scale(0.98);
+      box-shadow: 0 10px 18px rgba(15, 23, 42, 0.7);
+    }
+
+    .btn-secondary {
+      background: rgba(15, 23, 42, 0.7);
+      color: var(--text-main);
+      border-color: rgba(148, 163, 184, 0.5);
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.7);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(30, 64, 175, 0.9);
+      border-color: transparent;
+    }
+
+    .btn-small {
+      padding: 7px 14px;
+      font-size: 0.8rem;
+    }
+
+    /* ===== ХЕРО-БЛОК (ВВЕРХУ СТРАНИЦЫ) ===== */
+    .hero {
+      background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.25), transparent 50%),
+                  radial-gradient(circle at top right, rgba(55, 65, 81, 0.7), transparent 55%),
+                  var(--bg-section);
+      border-radius: var(--radius-lg);
+      padding: 22px 20px 20px;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 28px;
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+      gap: 20px;
+    }
+
+    .hero-main-title {
+      font-size: 1.7rem;
+      margin-bottom: 10px;
+    }
+
+    .hero-text {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .hero-badge {
+      font-size: 0.8rem;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .hero-note {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .hero-stat-block {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+    }
+
+    .hero-stat {
+      padding: 10px 14px;
+      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      min-width: 110px;
+    }
+
+    .hero-stat strong {
+      display: block;
+      font-size: 1.1rem;
+    }
+
+    .hero-stat span {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .hero-mini-text {
+      font-size: 0.8rem;
+      text-align: right;
+      color: var(--text-muted);
+    }
+
+    /* ===== СЕКЦИЯ ТОВАРОВ ===== */
+    .products-section {
+      margin-top: 10px;
+    }
+
+    .products-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .products-title {
+      font-size: 1.2rem;
+    }
+
+    .products-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .filter-pill {
+      font-size: 0.8rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      cursor: default;
+      color: var(--text-muted);
+    }
+
+    /* ===== СЕТКА КАРТОЧЕК ===== */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 18px;
+    }
+
+    .product-card {
+      position: relative;
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.96), rgba(17, 24, 39, 0.98));
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      padding: 12px 12px 14px;
+      box-shadow: 0 10px 22px rgba(15, 23, 42, 0.9);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(59, 130, 246, 0.7);
+      box-shadow: 0 18px 35px rgba(15, 23, 42, 0.95);
+    }
+
+    .product-image-wrapper {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      background: radial-gradient(circle at top, rgba(30, 64, 175, 0.6), rgba(15, 23, 42, 1));
+      aspect-ratio: 4 / 3;
+    }
+
+    .product-image-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .product-label {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      padding: 3px 8px;
+      font-size: 0.7rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+    }
+
+    .product-body {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .product-title {
+      font-size: 0.98rem;
+      font-weight: 600;
+    }
+
+    .product-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .product-footer {
+      margin-top: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .product-price {
+      font-weight: 700;
+      font-size: 0.98rem;
+      color: var(--accent-soft);
+    }
+
+    .product-meta {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* ===== МОДАЛЬНОЕ ОКНО ===== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 50;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.22s ease;
+    }
+
+    .modal-backdrop.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal {
+      max-width: 880px;
+      width: 100%;
+      background: radial-gradient(circle at top, rgba(30, 64, 175, 0.55), transparent 55%),
+                  rgba(15, 23, 42, 0.98);
+      border-radius: 24px;
+      padding: 18px 18px 20px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: 0 25px 80px rgba(15, 23, 42, 0.95);
+      transform: translateY(12px) scale(0.96);
+      opacity: 0;
+      transition: transform 0.22s ease, opacity 0.22s ease;
+    }
+
+    .modal-backdrop.active .modal {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .modal-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+
+    .modal-close-btn {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.9);
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      cursor: pointer;
+      color: var(--text-muted);
+      transform: translateY(0);
+      transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.8);
+    }
+
+    .modal-close-btn:hover {
+      background: rgba(30, 64, 175, 0.9);
+      color: #e5e7eb;
+      transform: translateY(-2px);
+      box-shadow: 0 14px 26px rgba(30, 64, 175, 0.85);
+    }
+
+    .modal-body {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.2fr);
+      gap: 18px;
+      margin-top: 6px;
+    }
+
+    /* ===== КАРУСЕЛЬ В МОДАЛЬНОМ ОКНЕ ===== */
+    .carousel-wrapper {
+      background: radial-gradient(circle at top, rgba(30, 64, 175, 0.8), rgba(15, 23, 42, 1));
+      border-radius: 18px;
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 260px;
+    }
+
+    .carousel-main-image {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      background: rgba(15, 23, 42, 1);
+      aspect-ratio: 4 / 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      padding: 10px;
+      text-align: center;
+    }
+
+    .carousel-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .carousel-buttons {
+      display: flex;
+      gap: 8px;
+    }
+
+    .carousel-btn {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      padding: 6px 11px;
+      font-size: 0.75rem;
+      background: rgba(15, 23, 42, 0.9);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transform: translateY(0);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+    }
+
+    .carousel-btn:hover {
+      background: rgba(30, 64, 175, 0.95);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 20px rgba(30, 64, 175, 0.8);
+    }
+
+    .carousel-indicator {
+      font-size: 0.8rem;
+    }
+
+    .modal-details {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 0.9rem;
+    }
+
+    .modal-description {
+      color: var(--text-muted);
+      line-height: 1.6;
+      font-size: 0.86rem;
+    }
+
+    .modal-list {
+      margin-top: 4px;
+      padding-left: 18px;
+      color: var(--text-muted);
+      font-size: 0.84rem;
+    }
+
+    .modal-list li {
+      margin-bottom: 4px;
+    }
+
+    .modal-price-block {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .modal-price {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent-soft);
+    }
+
+    .modal-meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .modal-footer-note {
+      margin-top: 4px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* ===== ФУТЕР ===== */
+    footer {
+      margin-top: 32px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(31, 41, 55, 0.9);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    /* ===== АДАПТИВ ===== */
+    @media (max-width: 820px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero-right {
+        align-items: flex-start;
+      }
+      .hero-mini-text {
+        text-align: left;
+      }
+      .modal-body {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .page-wrapper {
+        padding-inline: 12px;
+      }
+
+      header {
+        align-items: flex-start;
+      }
+
+      .hero {
+        padding: 18px 14px 16px;
+      }
+
+      .hero-main-title {
+        font-size: 1.4rem;
+      }
+
+      .products-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <!-- ===== ШАПКА САЙТА ===== -->
+    <header>
+      <div class="logo-block">
+        <div class="logo-title">Speaky Swan • English Store</div>
+        <div class="logo-subtitle">Готовые разработки и квесты по английскому</div>
+        <a href="https://vk.com/speaky_swan" target="_blank" class="btn btn-small" style="width: fit-content; margin-top:4px;">Группа Вконтакте</a>
+      </div>
+      
+      </div>
+      <div class="header-actions">
+        <div class="pill-text">Скачать и использовать на уроках уже сегодня</div>
+        <!--
+          ЭТУ КНОПКУ МОЖНО ПРИВЯЗАТЬ К КОНТАКТАМ / ФОРМЕ
+          href замените своим WhatsApp / Telegram / формой заявки
+        -->
+        <a href="https://vk.com/ksunyal"#contact" class="btn btn-small">Связаться со мной</a>
+      </div>
+    </header>
+
+    <!-- ===== ХЕРО-БЛОК (ПЕРВЫЙ БОЛЬШОЙ БЛОК) ===== -->
+    <section class="hero">
+      <div>
+        <h1 class="hero-main-title">Витрина моих разработок по английскому</h1>
+        <p class="hero-text">
+          Рабочие листы, квесты, карточки и интерактивные игры для уроков английского.
+          Все материалы уже готовы к печати и использованию онлайн.
+        </p>
+        <div class="hero-badges">
+          <span class="hero-badge">Дошкольники и начальная школа</span>
+          <span class="hero-badge">Подходит для онлайн и офлайн уроков</span>
+          <span class="hero-badge">PDF, PNG, интерактив</span>
+        </div>
+        <div class="hero-actions">
+          <!-- КНОПКА МОЖЕТ ВЕСТИ К БЛОКУ С ТОПОВЫМИ ТОВАРАМИ -->
+          <a href="#products" class="btn">Посмотреть материалы</a>
+          <span class="hero-note">Оплата и ссылки на скачивание настраиваются индивидуально.</span>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-stat-block">
+          <div class="hero-stat">
+            <strong>+50</strong>
+            <span>страниц рабочих листов</span>
+          </div>
+          <div class="hero-stat">
+            <strong>+10</strong>
+            <span>готовых квестов и игр</span>
+          </div>
+        </div>
+        <p class="hero-mini-text">
+          Выберите набор, нажмите «Купить» — в карточке можно подробно прочитать описание.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== СЕКЦИЯ ТОВАРОВ ===== -->
+    <section id="products" class="products-section">
+      <div class="products-header">
+        <h2 class="products-title">Мои материалы</h2>
+        <div class="products-controls">
+          <span class="filter-pill">Дошкольники • Начальная школа</span>
+          <!-- ЭТУ КНОПКУ МОЖНО СДЕЛАТЬ ФИЛЬТРОМ ИЛИ ССЫЛКОЙ НА ГУГЛ-ТАБЛИЦУ С ПОЛНЫМ СПИСКОМ -->
+
+        </div>
+      </div>
+
+      <div class="products-grid">
+        <!--
+          ===== ПРИМЕР КАРТОЧКИ ТОВАРА =====
+          Чтобы добавить новый товар, просто скопируйте .product-card целиком и измените:
+          - data-title          — название
+          - data-price          — цена
+          - data-description    — полное описание (для модального окна)
+          - data-images         — список картинок через запятую (URL ваших превью)
+          - data-link           — ссылка на оплату / лендинг
+
+          Внутри карточки можно изменить текстовое краткое описание.
+        -->
+
+        <article
+          class="product-card"
+          data-title="Shopping Street Quest"
+          data-price="200 ₽"
+          data-description=" 🏪Shopping Street Quest 🏪
+Мини квест на тему названий магазинов.
+(9 наименований, по лексике из Go Getter 4).
+
+Содержание:
+Слушаем персонажей и отправляем их в нужный магазин и заодно читаем как мы можем сказать о том что там покупаем.
+В каждом магазине нужно выполнить несложное грамматическое задание.
+И в конце задание на говорение на каждый магазин. Обратите внимание, на слайдах с этими вопросами на скамейке лежит кот, у него можно подсмотреть подсказку как можно ответить на каждый вопрос."
+          data-images="https://i.postimg.cc/s1gy9BQF/Shopping-Street-Quest.png"
+          data-link="https://vk.com/market/product/127978shopping-street-quest-127978-besplatno-v-vk-donate-221578810-12937704"
+        >
+          <div class="product-image-wrapper">
+            <!-- ЗДЕСЬ МОЖНО ВСТАВИТЬ РЕАЛЬНОЕ ПРЕВЬЮ -->
+			<div class="product-image-wrapper">
+    <img src="https://i.postimg.cc/s1gy9BQF/Shopping-Street-Quest.png" 
+         style="width:100%; height:100%; object-fit:cover;">
+</div>
+
+            <div class="https://i.postimg.cc/YL0HpVK3/Autumn-Word-Hunt.png">
+           
+            </div>
+            
+          </div>
+          <div class="product-body">
+            <h3 class="product-title">Shopping Street Quest </h3>
+            <p class="product-desc">
+			
+
+<a href="https://vk.com/market/product/127978shopping-street-quest-127978-besplatno-v-vk-donate-221578810-12937704" class="product-link" 
+   style="font-size:0.8rem;color:var(--accent-soft);text-decoration:underline;">
+   Перейти к материалу
+</a>
+
+			
+              🏪Shopping Street Quest 🏪
+Мини квест на тему названий магазинов.
+(9 наименований, по лексике из Go Getter 4).
+
+Содержание:
+Слушаем персонажей и отправляем их в нужный магазин и заодно читаем как мы можем сказать о том что там покупаем.
+В каждом магазине нужно выполнить несложное грамматическое задание.
+И в конце задание на говорение на каждый магазин. Обратите внимание, на слайдах с этими вопросами на скамейке лежит кот, у него можно подсмотреть подсказку как можно ответить на каждый вопрос.
+
+🍩Забрать можно в ВК Донате на максимальном уровне или купить отдельно.
+            </p>
+            <div class="product-footer">
+              <div>
+                <div class="product-price">200 ₽</div>
+                <div class="product-meta">Genially</div>
+              </div>
+              <button class="btn btn-small js-open-modal" type="button">Купить</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- ВТОРОЙ ПРИМЕР ТОВАРА -->
+        <article
+          class="product-card"
+          data-title="School Subjects"
+          data-price="200 ₽"
+          data-description="Содержание:
+🎒Карточки с названиями уроков и иллюстрацией.
+🎒Wordsearch (в этом задании при каждом обновлении страницы меняется место расположения слов).
+🎒Нужно выбрать подходящий под описание урок. Список уроков представлен в виде картинок для того чтобы вспомнить названия самостоятельно.
+🎒Заполнить пропуски в тексте.
+🎒И последнее задание на говорение по теме."
+          data-images="https://i.postimg.cc/Btnsc8L9/School-Subjects.png"
+          data-link="https://vk.com/market/product/127890school-subjects127890-221578810-12686550"
+        >
+          <div class="product-image-wrapper">
+    <img src="https://i.postimg.cc/Btnsc8L9/School-Subjects.png" 
+         style="width:100%; height:100%; object-fit:cover;">
+            <div class="School Subjects">
+              Превью интерактивного квеста Shopping Street
+            </div>
+            
+          </div>
+          <div class="product-body">
+            <h3 class="product-title">School Subjects</h3>
+           <p class="product-desc">
+
+<a href="https://vk.com/market/product/127890school-subjects127890-221578810-12686550" class="product-link" 
+   style="font-size:0.8rem;color:var(--accent-soft);text-decoration:underline;">
+   Перейти к материалу
+</a>
+
+			
+              🎒School Subjects 🎒
+Материал на изучение темы "Subjects"
+
+Содержание:
+🎒Карточки с названиями уроков и иллюстрацией.
+🎒Wordsearch (в этом задании при каждом обновлении страницы меняется место расположения слов).
+🎒Нужно выбрать подходящий под описание урок. Список уроков представлен в виде картинок для того чтобы вспомнить названия самостоятельно.
+🎒Заполнить пропуски в тексте.
+🎒И последнее задание на говорение по теме.
+
+Можно приобрести отдельно или забрать в ВК Донате на максимальном уровне
+            </p>
+            <div class="product-footer">
+              <div>
+                <div class="product-price">200 ₽</div>
+                <div class="product-meta">Genially</div>
+              </div>
+              <button class="btn btn-small js-open-modal" type="button">Купить</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- ТРЕТИЙ ПРИМЕР ТОВАРА -->
+        <article
+          class="product-card"
+          data-title="Autumn Word Hunt"
+          data-price="250₽"
+          data-description="🍁Autumn Word Hunt🍁
+Материал на чтение открытого и закрытого слога в простых словах CVC/CVCV.
+Выполнен в осенней тематике, эти слова встречаются еще в игре к Хеллоуину. Но если вы не проводите (или вам запретили) занятия к празднику то это нейтральная альтернатива."
+          data-images="https://i.postimg.cc/YL0HpVK3/Autumn-Word-Hunt.png"
+          data-link="https://vk.com/market/product/127809autumn-word-hunt127809-besplatno-v-vk-donate-221578810-12847424"
+        >
+            <div class="Autumn Word Hunt">
+            </div>
+			   <div class="product-image-wrapper">
+    <img src="https://i.postimg.cc/s1gy9BQF/Shopping-Street-Quest.png" 
+         style="width:100%; height:100%; object-fit:cover;">
+           </div>
+          <div class="product-body">
+            <h3 class="product-title">Autumn Word Hunt</h3>
+            <p class="product-desc">
+			
+
+<a href="https://vk.com/market/product/127809autumn-word-hunt127809-besplatno-v-vk-donate-221578810-12847424" class="product-link" 
+   style="font-size:0.8rem;color:var(--accent-soft);text-decoration:underline;">
+   Перейти к материалу
+</a>
+
+              
+🍁Autumn Word Hunt🍁
+Материал на чтение открытого и закрытого слога в простых словах CVC/CVCV.
+Выполнен в осенней тематике, эти слова встречаются еще в игре к Хеллоуину. Но если вы не проводите (или вам запретили) занятия к празднику то это нейтральная альтернатива.
+Механику выполнения заданий можно посмотреть в видео.
+А в конце игры ученик может получить именной сертификат как это сделать можно посмотреть по ссылке: https://vk.com/speaky_swan?z=video-221578810_45623963..
+
+🍩 Забрать можно в ВК Донате или купить отдельно.
+
+            </p>
+            <div class="product-footer">
+              <div>
+                <div class="product-price">250 ₽</div>
+                <div class="product-meta">Genially</div>
+              </div>
+              <button class="btn btn-small js-open-modal" type="button">Купить</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Добавляйте сюда новые .product-card по тому же шаблону -->
+      </div>
+    </section>
+
+    <!-- ===== ФУТЕР / КОНТАКТЫ ===== -->
+    <footer id="contact">
+      <div>
+        © <!-- Можно автоматически подставить год через JS, если нужно --> 2025 • Speaky Swan
+      </div>
+      <div>
+        <!-- СЮДА ВСТАВЬТЕ СВОИ КОНТАКТЫ / ССЫЛКИ -->
+        По всем вопросам:
+     
+
+<a href="https://vk.com/speaky_swan" class="contact" 
+   style="font-size:0.8rem;color:var(--accent-soft);text-decoration:underline;">
+   Сообщество ВК;    
+</a>
+<a href="https://vk.com/ksunyal" class="contact" 
+   style="font-size:0.8rem;color:var(--accent-soft);text-decoration:underline;">
+      Личная страница
+</a>
+
+    </footer>
+  </div>
+
+  <!-- ===== МОДАЛЬНОЕ ОКНО ДЛЯ ПОДРОБНОСТЕЙ ТОВАРА ===== -->
+  <div class="modal-backdrop" id="product-modal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modal-title">Название товара</h2>
+        <button class="modal-close-btn" type="button" id="modal-close" aria-label="Закрыть">
+          ✕
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="carousel-wrapper">
+          <div class="carousel-main-image" id="carousel-image">
+            Здесь будет превью товара (добавьте свои изображения в data-images)
+          </div>
+          <div class="carousel-controls">
+            <div class="carousel-buttons">
+              <button class="carousel-btn" type="button" id="carousel-prev">◀ Предыдущее</button>
+              <button class="carousel-btn" type="button" id="carousel-next">Следующее ▶</button>
+            </div>
+            <div class="carousel-indicator" id="carousel-indicator">1 / 1</div>
+          </div>
+        </div>
+
+        <div class="modal-details">
+          <div class="modal-description" id="modal-description">
+            Полное описание товара подставится сюда из data-description.
+          </div>
+
+          <!-- ПРИМЕР СПИСКА ПРЕИМУЩЕСТВ. Можно убрать или изменить под себя -->
+          <ul class="modal-list">
+            <li>Подходит для индивидуальных и групповых уроков.</li>
+            <li>Удобная структура: объяснение, практика, игра.</li>
+          </ul>
+
+          <div class="modal-price-block">
+            <div>
+              <div class="modal-price" id="modal-price">0 ₽</div>
+              <div class="modal-meta">Цена за весь комплект материалов.</div>
+            </div>
+            <!--
+              КНОПКА ПОКУПКИ В МОДАЛЬНОМ ОКНЕ
+              ССЫЛКА БУДЕТ БРАТЬСЯ ИЗ data-link В КАРТОЧКЕ ТОВАРА
+            -->
+            <a href="#" class="btn" id="modal-buy-link" target="_blank" rel="noopener noreferrer">
+              Купить
+            </a>
+          </div>
+          
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== СКРИПТ ДЛЯ РАБОТЫ МОДАЛЬНОГО ОКНА И КАРУСЕЛИ ===== -->
+  <script>
+    // Находим элементы модального окна
+    const modalBackdrop = document.getElementById('product-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDescription = document.getElementById('modal-description');
+    const modalPrice = document.getElementById('modal-price');
+    const modalBuyLink = document.getElementById('modal-buy-link');
+    const modalCloseBtn = document.getElementById('modal-close');
+
+    // Элементы карусели
+    const carouselImage = document.getElementById('carousel-image');
+    const carouselIndicator = document.getElementById('carousel-indicator');
+    const carouselPrevBtn = document.getElementById('carousel-prev');
+    const carouselNextBtn = document.getElementById('carousel-next');
+
+    // Массив ссылок на картинки для текущего товара
+    let currentImages = [];
+    let currentIndex = 0;
+
+    // Функция для обновления отображаемой картинки в карусели
+    function updateCarousel() {
+      if (!currentImages.length) {
+        carouselImage.innerHTML = 'Добавьте ссылки на изображения в атрибут data-images для карточки товара.';
+        carouselIndicator.textContent = '0 / 0';
+        return;
+      }
+
+      const src = currentImages[currentIndex];
+
+      // Создаём img, чтобы не дублировать стили
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = modalTitle.textContent || 'Превью товара';
+      img.style.width = '100%';
+      img.style.height = '100%';
+      img.style.objectFit = 'cover';
+
+      carouselImage.innerHTML = '';
+      carouselImage.appendChild(img);
+
+      carouselIndicator.textContent = `${currentIndex + 1} / ${currentImages.length}`;
+    }
+
+    // Функция открытия модального окна с данными конкретного товара
+    function openModalFromCard(card) {
+      const title = card.getAttribute('data-title') || 'Без названия';
+      const price = card.getAttribute('data-price') || '';
+      const description = card.getAttribute('data-description') || '';
+      const imagesAttr = card.getAttribute('data-images') || '';
+      const link = card.getAttribute('data-link') || '#';
+
+      modalTitle.textContent = title;
+      modalPrice.textContent = price;
+      modalDescription.textContent = description;
+      modalBuyLink.href = link; // ЗДЕСЬ ПОДСТАВЛЯЕТСЯ ВАША ССЫЛКА НА ОПЛАТУ
+
+      // Разбираем список картинок (через запятую)
+      currentImages = imagesAttr
+        .split(',')
+        .map((item) => item.trim())
+        .filter((item) => item.length > 0);
+
+      currentIndex = 0;
+      updateCarousel();
+
+      modalBackdrop.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    // Обработчики на кнопки "Купить" в карточках
+    const openModalButtons = document.querySelectorAll('.js-open-modal');
+
+    openModalButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const card = button.closest('.product-card');
+        if (card) {
+          openModalFromCard(card);
+        }
+      });
+    });
+
+    // Закрытие модального окна
+    function closeModal() {
+      modalBackdrop.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    modalCloseBtn.addEventListener('click', closeModal);
+
+    // Закрытие по клику на фон вокруг модального окна
+    modalBackdrop.addEventListener('click', (event) => {
+      if (event.target === modalBackdrop) {
+        closeModal();
+      }
+    });
+
+    // Закрытие по клавише Esc
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && modalBackdrop.classList.contains('active')) {
+        closeModal();
+      }
+    });
+
+    // Обработчики для карусели
+    carouselPrevBtn.addEventListener('click', () => {
+      if (!currentImages.length) return;
+      currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+      updateCarousel();
+    });
+
+    carouselNextBtn.addEventListener('click', () => {
+      if (!currentImages.length) return;
+      currentIndex = (currentIndex + 1) % currentImages.length;
+      updateCarousel();
+    });
+  </script>
+</body>
+</html>
